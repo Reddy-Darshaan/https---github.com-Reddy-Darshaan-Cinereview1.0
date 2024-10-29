@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jersey - Movie Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="page.css">
+</head>
+<body>
+    <div id="sectionmovie">
+        <div class="container">
+            <div class="text-center mt-4">
+                <h1 class="heading-3">Jersey</h1>
+                <img src="https://moviegalleri.net/wp-content/gallery/jersey-movie-posters-hd/jersey-movie-posters-hd-nani-shraddha-srinath-1195ba9.jpg" class="movie-image" alt="Jersey">
+
+                <!-- Movie Information -->
+                <div class="movie-info">
+                    <p><strong>Release Date:</strong> April 22, 2024</p>
+                    <p><strong>Genre:</strong> Drama, Sports</p>
+                    <p><strong>Director:</strong> Gowtham Tinnanuri</p>
+                    <p><strong>Cast:</strong> Nani, Shraddha Srinath</p>
+
+                    <!-- Rating Stars -->
+                    <div class="rating">
+                        <span class="rating-star">&#9733;</span>
+                        <span class="rating-star">&#9733;</span>
+                        <span class="rating-star">&#9733;</span>
+                        <span class="rating-star">&#9733;</span>
+                        <span class="rating-star">&#9734;</span>
+                    </div>
+
+                    <!-- Trailer -->
+                    <div class="mt-4">
+                        <h2>Trailer</h2>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/AjAe_Q1WZ_8?si=-O4Fm3FO8xKUxMZC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- User Review and Rating Form -->
+                <div class="mt-5">
+                    <h3>Submit Your Review</h3>
+                    <form id="reviewForm" class="text-left">
+                        <div class="form-group">
+                            <label for="userRating">Your Rating:</label>
+                            <select id="userRating" class="form-control" required>
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="userReview">Your Review:</label>
+                            <textarea id="userReview" class="form-control" rows="4" placeholder="Write your review here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Submit Review</button>
+                    </form>
+                </div>
+
+                <!-- Popular Reviews Section -->
+                <div class="mt-5">
+                    <h3>Popular Reviews</h3>
+                    <div class="review-section" id="reviewSection">
+                        <!-- Reviews fetched dynamically from the server will appear here -->
+                    </div>
+                </div>
+
+                <!-- Back Button - Navigating to Homepage -->
+                <button class="btn btn-primary mt-4" onclick="window.location.href='home.html'">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CineReview. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to fetch reviews from the server
+        document.addEventListener('DOMContentLoaded', () => {
+            function fetchReviews() {
+                $.ajax({
+                    url: 'fetch_reviews.php', // Fetches reviews from your PHP file
+                    type: 'GET',
+                    data: { movie_title: 'Jersey' }, // Pass the movie title
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#reviewSection').empty(); // Clear existing reviews
+                        if (response.success) {
+                            if (response.reviews.length > 0) {
+                                response.reviews.forEach(review => {
+                                    const reviewDiv = `<div class="review mb-3">
+                                                        <strong>Review:</strong>
+                                                        <p>${review.review} (Rating: ${review.rating} Stars)</p>
+                                                    </div>`;
+                                    $('#reviewSection').append(reviewDiv);
+                                });
+                            } else {
+                                $('#reviewSection').html('<p>No reviews submitted yet.</p>');
+                            }
+                        } else {
+                            $('#reviewSection').html('<p>Error loading reviews.</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#reviewSection').html('<p>Error loading reviews.</p>');
+                    }
+                });
+            }
+
+            // Fetch reviews when the document is ready
+            fetchReviews();
+
+            // Handle form submission
+            $('#reviewForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                const rating = $('#userRating').val();
+                const review = $('#userReview').val();
+
+                // Submit review using AJAX
+                $.ajax({
+                    url: 'submit_review.php', // Points to your review submission PHP script
+                    type: 'POST',
+                    data: { movie_title: 'Jersey', rating: rating, review: review }, // Data being sent to the server
+                    dataType: 'json',
+                    success: function(response) {
+                        alert(response.message); // Alert the response message
+                        if (response.success) {
+                            $('#reviewForm')[0].reset(); // Reset the form fields
+                            fetchReviews(); // Reload reviews after successful submission
+                        }
+                    },
+                    error: function() {
+                        alert('Failed to submit review.');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

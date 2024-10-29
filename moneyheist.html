@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Heist - Web Series Review</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+    <div id="sectionmovie">
+        <div class="container">
+            <div class="text-center mt-4">
+                <h1 class="heading-3">Money Heist</h1>
+                <img src="https://www.tallengestore.com/cdn/shop/products/MoneyHeist3Cast-NetflixTVShowPosterArt_9d728ea8-af17-41a8-a48e-fb3fa2a5c351.jpg?v=1589789254" class="movie-image" alt="Money Heist">
+
+                <!-- Movie Information -->
+                <div class="movie-info">
+                    <p><strong>Release Date:</strong> May 2, 2017</p>
+                    <p><strong>Genre:</strong> Crime, Thriller</p>
+                    <p><strong>Director:</strong> Álex Pina</p>
+                    <p><strong>Cast:</strong> Álvaro Morte, Úrsula Corberó, Itziar Ituño</p>
+                </div>
+
+                <!-- Trailer -->
+                <div class="mt-4">
+                    <h2>Trailer</h2>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ZAXA1DV4dtI" title="Money Heist Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!-- User Review and Rating Form -->
+                <div class="mt-5">
+                    <h3>Submit Your Review</h3>
+                    <form id="reviewForm" class="text-left">
+                        <div class="form-group">
+                            <label for="userRating">Your Rating:</label>
+                            <select id="userRating" class="form-control">
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="userReview">Your Review:</label>
+                            <textarea id="userReview" class="form-control" rows="4" placeholder="Write your review here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Submit Review</button>
+                    </form>
+                </div>
+
+                <!-- Popular Reviews Section -->
+                <div class="mt-5">
+                    <h3>Popular Reviews</h3>
+                    <div class="review-section" id="reviewSection">
+                        <!-- Dynamic reviews will appear here -->
+                    </div>
+                </div>
+
+                <!-- Back Button - Navigating to Homepage -->
+                <button class="btn btn-primary mt-4" onclick="window.location.href='home.html'">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CineReview. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Reviews -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function fetchReviews() {
+                $.ajax({
+                    url: 'fetch_reviews.php',
+                    type: 'GET',
+                    data: { movie_title: 'Money Heist' },
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#reviewSection').empty();
+                        if (response.success) {
+                            if (response.reviews.length > 0) {
+                                response.reviews.forEach(review => {
+                                    const reviewDiv = `<div class="review mb-3"><strong>Review:</strong><p>${review.review} (Rating: ${review.rating} Stars)</p></div>`;
+                                    $('#reviewSection').append(reviewDiv);
+                                });
+                            } else {
+                                $('#reviewSection').html('<p>No reviews submitted yet.</p>');
+                            }
+                        } else {
+                            $('#reviewSection').html('<p>Error loading reviews.</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#reviewSection').html('<p>Error loading reviews.</p>');
+                    }
+                });
+            }
+
+            fetchReviews();
+
+            $('#reviewForm').on('submit', function(event) {
+                event.preventDefault();
+                const rating = $('#userRating').val();
+                const review = $('#userReview').val();
+
+                $.ajax({
+                    url: 'submit_review.php',
+                    type: 'POST',
+                    data: { movie_title: 'Money Heist', rating: rating, review: review },
+                    dataType: 'json',
+                    success: function(response) {
+                        alert(response.message);
+                        if (response.success) {
+                            $('#reviewForm')[0].reset();
+                            fetchReviews();
+                        }
+                    },
+                    error: function() {
+                        alert('Failed to submit review.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineReview - MainPage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="page.css">
+</head>
+<body>
+    <div class="bg-container-1">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    CineReview
+                    <img src="https://up.yimg.com/ib/th?id=OIP.TG6Z4hNZd1emQOIkOHod5gHaHM&pid=Api&rs=1&c=1&qlt=95&w=110&h=107" alt="Star Icon" class="star-icon" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="help.html">Help</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="text-center mt-5">
+            <h1 class="heading-1">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.NET_nJHG-P8ASW4GCRvjcwHaHM&pid=Api&P=0&h=220" alt="Star Icon" class="star-icon" />
+                Welcome to CineReview
+                <img src="https://tse4.mm.bing.net/th?id=OIP.NET_nJHG-P8ASW4GCRvjcwHaHM&pid=Api&P=0&h=220" alt="Star Icon" class="star-icon" />
+            </h1>
+            <p class="para-1">Your ultimate guide to movie reviews and ratings.</p>
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            <div class="bg-container-3">
+                <img src="https://th.bing.com/th/id/OIP.nGagK8mwO46xtXvHXjcJbwHaD4?rs=1&pid=ImgDetMain" class="img-2" />
+            </div>
+            <div class="bg-container-3">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/41mpv9rBhmL.png" class="img-2" />
+            </div>
+            <div class="bg-container-3">
+                <img src="https://th.bing.com/th/id/OIP.2CoTUVgtRjUBay40UxRl2wHaHa?rs=1&pid=ImgDetMain" class="img-2" />
+            </div>
+            <div class="bg-container-3">
+                <img src="https://th.bing.com/th/id/OIP.BcQutfoZ6_vIauJpGgC2wwHaEK?rs=1&pid=ImgDetMain" class="img-2" />
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button id="signupButton" class="btn btn-warning">Sign Up</button>
+            <button id="loginButton" class="btn btn-outline-warning">Log In</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CineReview. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Event listener for the "Sign Up" button
+        const signupButton = document.getElementById("signupButton");
+        if (signupButton) {
+            signupButton.addEventListener("click", function() {
+                window.location.href = "http://localhost/webproject/signup.php"; // Navigates to the signup page
+            });
+        }
+
+        // Event listener for the "Log In" button
+        const loginButton = document.getElementById("loginButton");
+        if (loginButton) {
+            loginButton.addEventListener("click", function() {
+                window.location.href = "http://localhost/webproject/login.html"; // Ensure you are redirecting to the correct PHP page
+            });
+        }
+
+        // Event listener for the "Back" button on the signup page and home page
+        const backButton = document.getElementById("backButton");
+        if (backButton) {
+            backButton.addEventListener("click", function() {
+                window.location.href = "http://localhost/webproject/mainpage.html"; // Ensure the filename is correct and consistent
+            });
+        }
+    </script>
+</body>
+
+</html>

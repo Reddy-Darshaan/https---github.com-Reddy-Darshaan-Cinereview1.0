@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+}
+
+/* Heading Styles */
+.heading-2 {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.heading-3 {
+    font-family: 'Lobster', cursive;
+    color: #FFD700; /* Gold color */
+    font-size: 24px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Carousel Styles */
+#sectionhomepage .carousel-item img {
+    height: 280px;
+    width: 230px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+#sectionhomepage .carousel-item img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Movie Section */
+.bg-container-3 {
+    background-color: #222;
+    height: 280px;
+    width: 230px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.bg-container-3:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+}
+
+.img-2 {
+    height: 230px;
+    width: 230px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.img-2:hover {
+    transform: scale(1.1);
+}
+
+.text-2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    color: #FFD700;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Flexbox Container */
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFD700;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #FFC107;
+    transform: translateY(-3px);
+}
+
+/* Footer Styles */
+footer {
+    background-color: #222;
+    padding: 20px 0;
+    text-align: center;
+    color: #fff;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+.image-hover {
+    transform: scale(1.05); /* Slightly increase the size */
+    transition: transform 0.3s ease-in-out;
+}
+.movie-image {
+    width: 50%; /* Adjust as needed */
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+.rating {
+    font-size: 1.5em;
+    color: gold;
+}
+
+.rating-star {
+    color: gray;
+    margin: 0 2px;
+}
+/*logo*/
+.star-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px;
+    margin-right: 8px; /* Space between the logo and text */
+}
+/*signup page*/
+.form-signup {
+    width: 100%;
+    max-width: 350px; /* Center the form */
+    margin: 0 auto;
+}

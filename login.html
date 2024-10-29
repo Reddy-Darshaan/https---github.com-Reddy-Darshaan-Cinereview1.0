@@ -1,0 +1,61 @@
+<?php
+session_start(); // Start session to access messages
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineReview - Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+    <div class="bg-container-1 text-center">
+        <!-- Star Icon and Title -->
+        <img src="https://up.yimg.com/ib/th?id=OIP.TG6Z4hNZd1emQOIkOHod5gHaHM&pid=Api&rs=1&c=1&qlt=95&w=110&h=107" alt="Star Icon" class="star-icon" />
+        <h1 class="heading-1">Login to CineReview</h1>
+        <img src="https://up.yimg.com/ib/th?id=OIP.TG6Z4hNZd1emQOIkOHod5gHaHM&pid=Api&rs=1&c=1&qlt=95&w=110&h=107" alt="Star Icon" class="star-icon" />
+
+        <!-- Display error messages -->
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-danger">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']); // Clear message after displaying
+                ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- Login Form -->
+        <form class="form-signup" action="login.php" method="POST">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Login</button>
+        </form>
+
+        <!-- Back Button -->
+        <button id="backButton" class="btn btn-outline-warning mt-4" onclick="window.location.href='index.html'">Back</button>
+
+        <!-- Optional Sign-Up Link -->
+        <p class="mt-3">Don't have an account? <a href="signup.php" class="text-warning">Sign up here</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 CineReview. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
